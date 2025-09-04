@@ -63,6 +63,7 @@ const login = async () => {
       <form
         class="flex flex-col justify-center items-center gap-3 max-w-md rounded-2xl px-10 py-10 mx-auto shadow-2xl">
         <!-- شرط: لو مفيش user.id → عرض login form -->
+      
         <template v-if="!user?.id">
           <h1 class="text-xl font-bold">Welcome to Learning</h1>
           <p class="text-sm text-gray-500">Access your educational dashboard</p>
@@ -145,6 +146,7 @@ const login = async () => {
             </div>
           </div>
         </template>
+
       </form>
     </div>
 

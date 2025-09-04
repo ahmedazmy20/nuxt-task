@@ -6,10 +6,16 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ["@nuxt/eslint", "@nuxt/ui"],
   css: ["@/assets/css/main.css"],
+
   vite: {
-    plugins: [
-      // Add your Vite plugins here
-      tailwindcss(),
-    ],
+    plugins: [tailwindcss()],
+  },
+
+  app: {
+    baseURL: "/nuxt-task/",
+  },
+
+  nitro: {
+    preset: "github-pages",
   },
 });
