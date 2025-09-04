@@ -56,6 +56,12 @@ const continueDashboard = () => {
     router.push("/");
   }
 };
+const BackToLogin = () => {
+  user.value.id = "";
+  user.value.role = "";
+  user.value.branch = "";
+  router.push("/");
+};
 </script>
 
 <template>
@@ -64,8 +70,8 @@ const continueDashboard = () => {
     <div class="p-5 flex items-center justify-between">
       <button
         class="hover:bg-blue-500 font-semibold px-4 py-2 rounded-md transition-colors duration-200 flex"
-        @click="router.push('/')">
-        <ArrowLeft class="text-sm me-2" /> Back to Home
+        @click="BackToLogin">
+        <ArrowLeft class="text-sm me-2" />Back to Login
       </button>
       <div>
         <p>Welcome, {{ user?.id }}</p>
