@@ -16,9 +16,9 @@ export default defineNuxtConfig({
     baseURL: "/nuxt-task/",
   },
 
-  nitro: {
-    preset: "github-pages",
-  },
+  // nitro: {
+  //   preset: "github-pages",
+  // },
 
   colorMode: {
     preference: "light",
