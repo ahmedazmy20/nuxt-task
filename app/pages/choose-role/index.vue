@@ -65,7 +65,7 @@ const BackToLogin = () => {
 </script>
 
 <template>
-  <div class="bg-[#fefaf4]">
+  <div class="bg-[#fefaf4] min-h-screen flex flex-col">
     <!-- Back to Home -->
     <div class="p-5 flex items-center justify-between">
       <button
@@ -80,7 +80,7 @@ const BackToLogin = () => {
     </div>
 
     <div
-      class="flex flex-col items-center justify-center min-h-screen gap-6 pb-10">
+      class="flex flex-col px-5 items-center justify-center max-h-screen gap-6 pb-10">
       <!-- icon -->
       <div
         class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
@@ -96,11 +96,12 @@ const BackToLogin = () => {
       </p>
 
       <!-- select roles -->
-      <div class="flex gap-16 mt-5 flex-wrap justify-center">
+      <div
+        class="flex gap-5  p-4 justify-start md:justify-center overflow-x-auto md:overflow-visible w-full">
         <div
           v-for="role in roles"
           :key="role.role"
-          class="flex bg-[#F8FAFC] border-2 justify-center items-center flex-col shadow-md p-6 rounded-lg cursor-pointer px-14 py-10 transition"
+          class="flex flex-col justify-center items-center bg-[#F8FAFC] border-2 shadow-md rounded-lg cursor-pointer transition flex-shrink-0 w-[8rem] h-[10rem] md:w-[12rem] md:h-[14rem] md:px-14 md:py-10 lg:w-auto lg:h-auto"
           :class="
             selectedRole === role.role ? 'border-blue-500' : 'border-gray-200'
           "
@@ -109,11 +110,17 @@ const BackToLogin = () => {
             selectedBranch = '';
           ">
           <div
-            class="w-16 h-16 flex items-center justify-center rounded-full bg-[#DBEAFE]">
-            <component :is="role.icon" class="text-blue-600 w-10 h-10" />
+            class="w-10 h-10 md:w-16 md:h-16 flex items-center justify-center rounded-full bg-[#DBEAFE]">
+            <component
+              :is="role.icon"
+              class="text-blue-600 w-8 h-8 md:w-12 md:h-12" />
           </div>
-          <h2 class="font-semibold mt-3 mb-2">{{ role.role }}</h2>
-          <p class="text-[#626e7e] mb-5">{{ role.numBranchs }}</p>
+          <h2 class="mt-3 mb-2 md:font-semibold text-center">
+            {{ role.role }}
+          </h2>
+          <p class="text-[#626e7e] text-center md:mb-5">
+            {{ role.numBranchs }}
+          </p>
           <strong v-if="selectedRole === role.role">
             <BadgeCheck class="w-6 h-6 text-blue-600" />
           </strong>
@@ -123,13 +130,14 @@ const BackToLogin = () => {
       <!-- select branch -->
       <div
         v-if="selectedRole"
-        class="flex flex-col md:flex-row gap-4 mt-8 px-5 py-10 rounded-2xl items-center bg-[#ffffff] md:min-w-[58rem]">
-
-        <div class="flex flex-col md:flex-row flex-wrap  p-2 rounded-2xl md:items-start gap-10 mt-4 w-full">
+        class="flex flex-col md:flex-row gap-4 px-5 py-7 rounded-2xl items-center   w-full md:max-w-[58rem]  shadow-lg">
+        <!-- branches container -->
+        <div
+          class="flex flex-col md:flex-row md:flex-wrap gap-4 lg:gap-6 mt-4 w-full max-h-[5rem] overflow-y-auto md:max-h-none md:overflow-visible px-2 scroll-smooth">
           <div
             v-for="branch in filteredBranches"
             :key="branch.name"
-            class="flex justify-center items-center shadow-md rounded-lg cursor-pointer px-8 py-4 gap-5 border-2 transition"
+            class="flex justify-center items-center shadow-md rounded-lg cursor-pointer px-2 py-2 lg:px-6 lg:py-4 gap-5 border-2 transition mt-2"
             :class="
               selectedBranch === branch.name
                 ? 'border-blue-500'
@@ -137,7 +145,7 @@ const BackToLogin = () => {
             "
             @click="selectedBranch = branch.name">
             <div
-              class="w-16 h-16 flex items-center justify-center text-2xl rounded-2xl bg-[#F1F5F9]">
+              class="w-10 h-10 lg:w-16 lg:h-16 flex items-center justify-center text-2xl rounded-2xl bg-[#F1F5F9]">
               <component :is="branch.icon" class="w-8 h-8 text-[#6c5245]" />
             </div>
             <div class="flex flex-col">
@@ -154,7 +162,7 @@ const BackToLogin = () => {
       <!-- Continue Button -->
       <button
         :disabled="!selectedBranch"
-        class="text-white px-11 py-2 rounded-xl font-bold text-xl duration-200 mt-6 transition-all"
+        class="text-white px-11 py-2 rounded-xl font-bold text-xl duration-200 transition-all"
         :class="[
           !selectedBranch
             ? 'bg-blue-300 cursor-not-allowed'

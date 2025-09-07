@@ -62,9 +62,9 @@ function goHome() {
 <template>
   <div class="flex md:flex-row items-center max-h-screen bg-white w-full">
     <!-- left -->
-    <div class="left bg-[#FFFFFF] w-full px-10 md:px-20 py-20">
+    <div class="left bg-[#FFFFFF] w-full h-screen flex items-center justify-center  px-10 md:px-20 py-20">
       <form
-        class="flex flex-col bg-[#fcf8f8] justify-center items-center gap-3 max-w-md rounded-2xl px-10 py-10 mx-auto shadow-2xl"
+        class="flex flex-col bg-[#fcf8f8] justify-center items-center gap-3 md:min-w-md  rounded-2xl px-10 py-10 mx-auto shadow-2xl"
         @submit.prevent="login">
         <!-- شرط: لو مفيش user.id → عرض login form -->
 
