@@ -8,14 +8,12 @@ const password = ref("");
 const router = useRouter();
 const isLoading = ref(false);
 
-//  state مشترك للمستخدم
 const user = useState("user", () => ({
   id: "",
   role: "",
   branch: "",
 }));
 
-// الكروت (يمين الصفحة)
 const cards = [
   {
     icon: BookOpen,
@@ -58,9 +56,9 @@ const login = async () => {
 <template>
   <div class="flex md:flex-row items-center max-h-screen bg-white w-full">
     <!-- left -->
-    <div class="left bg-[#FFFFFF] w-full px-20 py-20">
+    <div class="left bg-[#FFFFFF] w-full px-10 md:px-20 py-20">
       <form
-        class="flex flex-col bg-[#F8FAFC] justify-center items-center gap-3 max-w-md rounded-2xl px-10 py-10 mx-auto shadow-2xl">
+        class="flex flex-col bg-[#fcf8f8] justify-center items-center gap-3 max-w-md rounded-2xl px-10 py-10 mx-auto shadow-2xl">
         <!-- شرط: لو مفيش user.id → عرض login form -->
 
         <template v-if="!user?.id">
@@ -173,12 +171,12 @@ const login = async () => {
 
     <!-- right ثابت -->
     <div
-      class="right bg-[#2e6aecd8] static w-full min-h-screen hidden lg:flex flex-col items-center justify-center text-white text-2xl font-bold pt-20"
+      class="right bg-[#2e6aecd8] static w-full min-h-screen hidden lg:flex flex-col items-center justify-center text-white text-2xl font-bold "
       style="
         background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fillRule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fillOpacity=\'0.3\'%3E%3Ccircle cx=\'30\' cy=\'30\' r=\'2\'/%3E%3Ccircle cx=\'10\' cy=\'10\' r=\'1\'/%3E%3Ccircle cx=\'50\' cy=\'50\' r=\'1\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
       ">
       <div
-        class="bg-[#2e6aecd8] relative top-0 left-0 w-full py-10 flex flex-col items-center justify-center">
+        class="bg-[#2e6aecd8] relative top-0 left-0 w-full min-h-screen flex flex-col items-center justify-center">
         <div class="top-title flex flex-col items-center">
           <div class="p-5 rounded-2xl bg-[#5b8af0e7] mb-4 inline-block border">
             <School class="w-10 h-10" />

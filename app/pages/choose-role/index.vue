@@ -65,7 +65,7 @@ const BackToLogin = () => {
 </script>
 
 <template>
-  <div class="bg-[#F4F8FE]">
+  <div class="bg-[#fefaf4]">
     <!-- Back to Home -->
     <div class="p-5 flex items-center justify-between">
       <button
@@ -96,7 +96,7 @@ const BackToLogin = () => {
       </p>
 
       <!-- select roles -->
-      <div class="flex gap-16 mt-5">
+      <div class="flex gap-16 mt-5 flex-wrap justify-center">
         <div
           v-for="role in roles"
           :key="role.role"
@@ -123,10 +123,9 @@ const BackToLogin = () => {
       <!-- select branch -->
       <div
         v-if="selectedRole"
-        class="flex flex-col gap-4 mt-8 px-5 py-10 rounded-2xl items-center bg-[#ffffff] min-w-[920px]">
-        <h2 class="text-xl font-semibold">Select Your Branch</h2>
+        class="flex flex-col md:flex-row gap-4 mt-8 px-5 py-10 rounded-2xl items-center bg-[#ffffff] md:min-w-[58rem]">
 
-        <div class="flex items-start gap-10 mt-4 w-full">
+        <div class="flex flex-col md:flex-row flex-wrap  p-2 rounded-2xl md:items-start gap-10 mt-4 w-full">
           <div
             v-for="branch in filteredBranches"
             :key="branch.name"
@@ -139,7 +138,7 @@ const BackToLogin = () => {
             @click="selectedBranch = branch.name">
             <div
               class="w-16 h-16 flex items-center justify-center text-2xl rounded-2xl bg-[#F1F5F9]">
-              <component :is="branch.icon" class="w-8 h-8 text-[#45556C]" />
+              <component :is="branch.icon" class="w-8 h-8 text-[#6c5245]" />
             </div>
             <div class="flex flex-col">
               <h2 class="font-bold">{{ branch.name }}</h2>
