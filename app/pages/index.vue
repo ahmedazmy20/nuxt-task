@@ -51,6 +51,12 @@ const login = async () => {
     }, 1500);
   }
 };
+
+function goHome() {
+  user.value = null;
+  id.value = "";
+  password.value = "";
+}
 </script>
 
 <template>
@@ -58,7 +64,8 @@ const login = async () => {
     <!-- left -->
     <div class="left bg-[#FFFFFF] w-full px-10 md:px-20 py-20">
       <form
-        class="flex flex-col bg-[#fcf8f8] justify-center items-center gap-3 max-w-md rounded-2xl px-10 py-10 mx-auto shadow-2xl">
+        class="flex flex-col bg-[#fcf8f8] justify-center items-center gap-3 max-w-md rounded-2xl px-10 py-10 mx-auto shadow-2xl"
+        @submit.prevent="login">
         <!-- شرط: لو مفيش user.id → عرض login form -->
 
         <template v-if="!user?.id">
@@ -68,36 +75,37 @@ const login = async () => {
           <div class="input mt-5 w-full flex flex-col gap-4">
             <!-- Staff/Student ID -->
             <div class="flex flex-col gap-1">
-              <label for="id" class="text-sm font-medium text-gray-700"
-                >Staff/Student ID</label
-              >
+              <label for="id" class="text-sm font-medium text-gray-700">
+                Staff/Student ID
+              </label>
               <UInput
                 id="id"
                 v-model="id"
                 type="text"
                 placeholder="Enter your ID"
-                class="w-full my-2" />
+                class="w-full my-2"
+                required />
             </div>
 
             <!-- Password -->
             <div class="flex flex-col gap-1">
-              <label for="password" class="text-sm font-medium text-gray-700"
-                >Password</label
-              >
+              <label for="password" class="text-sm font-medium text-gray-700">
+                Password
+              </label>
               <UInput
                 id="password"
                 v-model="password"
                 type="password"
                 placeholder="Enter your password"
-                class="w-full" />
+                class="w-full"
+                required />
             </div>
           </div>
 
           <!-- Sign in -->
           <UButton
             class="mt-4 w-full bg-[#2B67EC] hover:bg-[#2B67EC]/90 active:bg-[#2B67EC]/80 flex items-center justify-center py-3"
-            type="submit"
-            @click.prevent="login">
+            type="submit">
             <span v-if="!isLoading">Sign in</span>
             <span v-else>Signing in...</span>
           </UButton>
@@ -161,7 +169,8 @@ const login = async () => {
             </div>
 
             <UButton
-              class="mt-4 w-full bg-[#2B67EC] hover:bg-[#2B67EC]/90 active:bg-[#2B67EC]/80 flex items-center justify-center py-3">
+              class="mt-4 w-full bg-[#2B67EC] hover:bg-[#2B67EC]/90 active:bg-[#2B67EC]/80 flex items-center justify-center py-3"
+              @click="goHome">
               <span>Enter Dashboard</span>
             </UButton>
           </div>
@@ -171,7 +180,7 @@ const login = async () => {
 
     <!-- right ثابت -->
     <div
-      class="right bg-[#2e6aecd8] static w-full min-h-screen hidden lg:flex flex-col items-center justify-center text-white text-2xl font-bold "
+      class="right bg-[#2e6aecd8] static w-full min-h-screen hidden lg:flex flex-col items-center justify-center text-white text-2xl font-bold"
       style="
         background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fillRule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fillOpacity=\'0.3\'%3E%3Ccircle cx=\'30\' cy=\'30\' r=\'2\'/%3E%3Ccircle cx=\'10\' cy=\'10\' r=\'1\'/%3E%3Ccircle cx=\'50\' cy=\'50\' r=\'1\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
       ">
