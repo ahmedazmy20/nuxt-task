@@ -65,7 +65,7 @@ const BackToLogin = () => {
 </script>
 
 <template>
-  <div class="bg-[#fefaf4] min-h-screen flex flex-col">
+  <div class="bg-[#F4F8FC] min-h-screen flex flex-col">
     <!-- Back to Home -->
     <div class="p-5 flex items-center justify-between">
       <button
@@ -80,28 +80,32 @@ const BackToLogin = () => {
     </div>
 
     <div
-      class="flex flex-col px-5 items-center justify-center max-h-screen gap-6 pb-10">
+      :class="selectedRole ? 'mt-0' : 'mt-32'"
+      class="flex flex-col px-5 items-center justify-center max-h-screen gap-6">
       <!-- icon -->
       <div
-        class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
-        <span class="text-2xl"><BookOpen class="text-blue-500 w-9 h-9" /></span>
+        class="w-16 h-16 md:w-20 md:min-h-20 bg-blue-100 rounded-full flex items-center justify-center">
+        <span class="text-2xl"
+          ><BookOpen class="text-blue-500 w-10 h-10"
+        /></span>
       </div>
 
       <!-- title -->
-      <h1 class="text-3xl font-bold">Choose Your Role</h1>
+      <h1 class="text-3xl md:text-4xl font-bold">Choose Your Role</h1>
 
       <!-- description -->
-      <p class="text-gray-600 text-center max-w-lg">
+      <p
+        class="text-gray-500 text-center text-xl font-medium max-w-3xl px-5 md:px-0">
         Select your position and branch to access your personalized dashboard
       </p>
 
       <!-- select roles -->
       <div
-        class="flex gap-5  p-4 justify-start md:justify-center overflow-x-auto md:overflow-visible w-full">
+        class="flex gap-5 p-4 justify-start md:justify-center overflow-x-auto md:overflow-visible w-full">
         <div
           v-for="role in roles"
           :key="role.role"
-          class="flex flex-col justify-center items-center bg-[#F8FAFC] border-2 shadow-md rounded-lg cursor-pointer transition flex-shrink-0 w-[8rem] h-[10rem] md:w-[12rem] md:h-[14rem] md:px-14 md:py-10 lg:w-auto lg:h-auto"
+          class="flex flex-col justify-center items-center bg-[#F8FAFC] border-2 shadow-md rounded-lg cursor-pointer transition flex-grow max-w-[18rem] min-w-[10rem] h-[10rem] md:w-[12rem] md:h-[14rem] md:px-11 md:py-10 lg:w-auto lg:h-auto"
           :class="
             selectedRole === role.role ? 'border-blue-500' : 'border-gray-200'
           "
@@ -115,7 +119,7 @@ const BackToLogin = () => {
               :is="role.icon"
               class="text-blue-600 w-8 h-8 md:w-12 md:h-12" />
           </div>
-          <h2 class="mt-3 mb-2 md:font-semibold text-center">
+          <h2 class="mt-3 mb-2 font-semibold md:font-bold text-xl text-center">
             {{ role.role }}
           </h2>
           <p class="text-[#626e7e] text-center md:mb-5">
@@ -130,31 +134,36 @@ const BackToLogin = () => {
       <!-- select branch -->
       <div
         v-if="selectedRole"
-        class="flex flex-col md:flex-row gap-4 px-5 py-7 rounded-2xl items-center   w-full md:max-w-[58rem]  shadow-lg">
-        <!-- branches container -->
+        class="bg-[#FFFFFF] w-full max-w-4xl rounded-2xl py-5">
+        <h2 class="text-2xl font-bold text-center">Select Your Branch</h2>
         <div
-          class="flex flex-col md:flex-row md:flex-wrap gap-4 lg:gap-6 mt-4 w-full max-h-[5rem] overflow-y-auto md:max-h-none md:overflow-visible px-2 scroll-smooth">
+          class="flex flex-col md:flex-row gap-4 px-5 rounded-2xl items-center w-full md:max-w-[58rem]">
+          <!-- branches container -->
+
           <div
-            v-for="branch in filteredBranches"
-            :key="branch.name"
-            class="flex justify-center items-center shadow-md rounded-lg cursor-pointer px-2 py-2 lg:px-6 lg:py-4 gap-5 border-2 transition mt-2"
-            :class="
-              selectedBranch === branch.name
-                ? 'border-blue-500'
-                : 'border-gray-200'
-            "
-            @click="selectedBranch = branch.name">
+            class="flex flex-col md:flex-row md:flex-wrap gap-4 lg:gap-6 mt-4 w-full max-h-[5rem] overflow-y-auto md:max-h-none md:overflow-visible px-2 scroll-smooth">
             <div
-              class="w-10 h-10 lg:w-16 lg:h-16 flex items-center justify-center text-2xl rounded-2xl bg-[#F1F5F9]">
-              <component :is="branch.icon" class="w-8 h-8 text-[#6c5245]" />
+              v-for="branch in filteredBranches"
+              :key="branch.name"
+              class="flex flex-grow justify-center items-center shadow-md rounded-lg cursor-pointer px-2 py-2 lg:px-6 lg:py-4 gap-5 border-2 transition mt-2"
+              :class="
+                selectedBranch === branch.name
+                  ? 'border-blue-500'
+                  : 'border-gray-200'
+              "
+              @click="selectedBranch = branch.name">
+              <div
+                class="w-10 h-10 lg:w-16 lg:h-16 flex items-center justify-center text-2xl rounded-2xl bg-[#F1F5F9]">
+                <component :is="branch.icon" class="w-8 h-8 text-[#6c5245]" />
+              </div>
+              <div class="flex flex-col">
+                <h2 class="font-bold">{{ branch.name }}</h2>
+                <p>Branch Location</p>
+              </div>
+              <strong v-if="selectedBranch === branch.name">
+                <BadgeCheck class="w-6 h-6 text-blue-600" />
+              </strong>
             </div>
-            <div class="flex flex-col">
-              <h2 class="font-bold">{{ branch.name }}</h2>
-              <p>Branch Location</p>
-            </div>
-            <strong v-if="selectedBranch === branch.name">
-              <BadgeCheck class="w-6 h-6 text-blue-600" />
-            </strong>
           </div>
         </div>
       </div>
