@@ -32,8 +32,8 @@ const user = useState("user", () => ({
   <form @submit.prevent="login">
     <div
       class="flex flex-col bg-[#fcf9f8] justify-center items-center gap-3 md:min-w-md rounded-2xl px-8 py-14 mx-auto shadow-2xl">
-      <h1 class="text-3xl font-bold">Welcome to Learning</h1>
-      <p class="font-semibold text-gray-500">
+      <h1 class=" text-xl md:text-3xl font-bold">Welcome to Learning</h1>
+      <p class="md:font-semibold text-gray-500 text-center">
         Access your educational dashboard
       </p>
 

@@ -80,22 +80,22 @@ const BackToLogin = () => {
     </div>
 
     <div
-      :class="selectedRole ? 'mt-0' : 'mt-32'"
-      class="flex flex-col px-5 items-center justify-center max-h-screen gap-6">
+      :class="selectedRole ? 'mt-0' : 'md:mt-32'"
+      class="flex flex-col px-5 items-center justify-center max-h-screen gap-2 md:gap-6">
       <!-- icon -->
       <div
-        class="w-16 h-16 md:w-20 md:min-h-20 bg-blue-100 rounded-full flex items-center justify-center">
+        class="w-16 h-16 hidden md:w-20 md:min-h-20 bg-blue-100 rounded-full md:flex items-center justify-center">
         <span class="text-2xl"
           ><BookOpen class="text-blue-500 w-10 h-10"
         /></span>
       </div>
 
       <!-- title -->
-      <h1 class="text-3xl md:text-4xl font-bold">Choose Your Role</h1>
+      <h1 class="text-2xl md:text-4xl font-bold">Choose Your Role</h1>
 
       <!-- description -->
       <p
-        class="text-gray-500 text-center text-xl font-medium max-w-3xl px-5 md:px-0">
+        class="text-gray-500 text-center text-sm md:text-xl font-medium max-w-3xl px-5 md:px-0">
         Select your position and branch to access your personalized dashboard
       </p>
 
@@ -119,10 +119,11 @@ const BackToLogin = () => {
               :is="role.icon"
               class="text-blue-600 w-8 h-8 md:w-12 md:h-12" />
           </div>
-          <h2 class="mt-3 mb-2 font-semibold md:font-bold text-xl text-center">
+          <h2
+            class="mt-3 mb-2 font-semibold md:font-bold md:text-xl text-center">
             {{ role.role }}
           </h2>
-          <p class="text-[#626e7e] text-center md:mb-5">
+          <p class="text-[#626e7e] text-center text-sm md:text-base md:mb-5">
             {{ role.numBranchs }}
           </p>
           <strong v-if="selectedRole === role.role">
@@ -134,18 +135,21 @@ const BackToLogin = () => {
       <!-- select branch -->
       <div
         v-if="selectedRole"
-        class="bg-[#FFFFFF] w-full max-w-4xl rounded-2xl py-5">
+        class="bg-[#FFFFFF] w-full max-w-4xl rounded-2xl py-5 mb-3">
         <h2 class="text-2xl font-bold text-center">Select Your Branch</h2>
         <div
           class="flex flex-col md:flex-row gap-4 px-5 rounded-2xl items-center w-full md:max-w-[58rem]">
           <!-- branches container -->
 
           <div
+            :class="
+              filteredBranches.length < 2 ? 'min-h-[5rem]' : 'min-h-[8rem]'
+            "
             class="flex flex-col md:flex-row md:flex-wrap gap-4 lg:gap-6 mt-4 w-full max-h-[5rem] overflow-y-auto md:max-h-none md:overflow-visible px-2 scroll-smooth">
             <div
               v-for="branch in filteredBranches"
               :key="branch.name"
-              class="flex flex-grow justify-center items-center shadow-md rounded-lg cursor-pointer px-2 py-2 lg:px-6 lg:py-4 gap-5 border-2 transition mt-2"
+              class="flex md:flex-grow justify-center items-center shadow-md rounded-lg cursor-pointer px-2 py-2 lg:px-6 lg:py-4 gap-5 border-2 transition mt-2"
               :class="
                 selectedBranch === branch.name
                   ? 'border-blue-500'
@@ -171,7 +175,7 @@ const BackToLogin = () => {
       <!-- Continue Button -->
       <button
         :disabled="!selectedBranch"
-        class="text-white px-11 py-2 rounded-xl font-bold text-xl duration-200 transition-all"
+        class="text-white px-4 md:px-11 py-2 rounded-xl font-bold md:text-xl duration-200 transition-all"
         :class="[
           !selectedBranch
             ? 'bg-blue-300 cursor-not-allowed'
