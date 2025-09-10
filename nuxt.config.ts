@@ -4,7 +4,14 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
-  modules: ["@nuxt/eslint", "@nuxt/ui", "@nuxtjs/color-mode"],
+  modules: [
+    // Other modules
+    "@nuxt/eslint",
+    "@nuxt/ui",
+    "@nuxtjs/color-mode",
+    // The correct configuration for vee-validate
+    ["@vee-validate/nuxt", { autoImports: true }],
+  ],
 
   css: ["@/assets/css/main.css"],
 

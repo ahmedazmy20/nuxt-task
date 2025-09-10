@@ -11,12 +11,15 @@ const user = useState("user", () => ({
   id: "",
   role: "",
   branch: "",
+  arabicField: "",
+  englishField: "",
 }));
 
 function goHome() {
-  user.value = {};
+  user.value.id = "";
+  user.value.role = "";
+  user.value.branch = "";
   id.value = "";
-  role.value = "";
   password.value = "";
   router.push("/");
 }
@@ -56,7 +59,7 @@ function goHome() {
             <User class="text-blue-600 w-6 h-6" />
           </div>
           <div class="flex flex-col">
-            <span class="font-medium text-gray-700">{{ user?.id }}</span>
+            <span class="font-medium text-gray-700">{{ user?.englishField }}</span>
             <span class="text-sm text-gray-500">ID: {{ user?.id }}</span>
           </div>
         </div>

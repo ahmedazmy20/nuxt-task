@@ -74,7 +74,7 @@ const BackToLogin = () => {
         <ArrowLeft class="text-sm me-2" />Back to Login
       </button>
       <div>
-        <p>Welcome, {{ user?.id }}</p>
+        <p>Welcome, {{ user?.englishField }}</p>
         <p class="text-sm text-end text-gray-500">ID: {{ user?.id }}</p>
       </div>
     </div>
@@ -105,7 +105,7 @@ const BackToLogin = () => {
         <div
           v-for="role in roles"
           :key="role.role"
-          class="flex flex-col justify-center items-center bg-[#F8FAFC] border-2 shadow-md rounded-lg cursor-pointer transition flex-grow max-w-[18rem] min-w-[10rem] h-[10rem] md:w-[12rem] md:h-[14rem] md:px-11 md:py-10 lg:w-auto lg:h-auto"
+          class="flex flex-col justify-center items-center bg-[#F8FAFC] border-2 shadow-md rounded-lg cursor-pointer transition flex-grow min-w-[10rem] max-w-[17rem] md:w-[12rem] h-[10rem] md:h-[15rem] md:px-11 md:py-10"
           :class="
             selectedRole === role.role ? 'border-blue-500' : 'border-gray-200'
           "
@@ -143,13 +143,13 @@ const BackToLogin = () => {
 
           <div
             :class="
-              filteredBranches.length < 2 ? 'min-h-[5rem]' : 'min-h-[8rem]'
+              filteredBranches.length < 2 ? 'min-h-[5rem]' : 'min-h-[8rem] md:min-h-[5rem]'
             "
             class="flex flex-col md:flex-row md:flex-wrap gap-4 lg:gap-6 mt-4 w-full max-h-[5rem] overflow-y-auto md:max-h-none md:overflow-visible px-2 scroll-smooth">
             <div
               v-for="branch in filteredBranches"
               :key="branch.name"
-              class="flex md:flex-grow justify-center items-center shadow-md rounded-lg cursor-pointer px-2 py-2 lg:px-6 lg:py-4 gap-5 border-2 transition mt-2"
+              class="flex md:flex-grow lg:flex-grow-0 justify-center items-center shadow-md rounded-lg cursor-pointer md:max-h-[5rem] px-2 py-2 lg:px-6 lg:py-4 gap-5 border-2 transition mt-2"
               :class="
                 selectedBranch === branch.name
                   ? 'border-blue-500'
