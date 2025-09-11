@@ -65,7 +65,7 @@ const BackToLogin = () => {
 </script>
 
 <template>
-  <div class="bg-[#F4F8FC] min-h-screen flex flex-col">
+  <div class="bg-[#fcf8f4] min-h-screen flex flex-col">
     <!-- Back to Home -->
     <div class="p-5 flex items-center justify-between">
       <button
@@ -80,7 +80,7 @@ const BackToLogin = () => {
     </div>
 
     <div
-      :class="selectedRole ? 'mt-0' : 'md:mt-32'"
+      :class="selectedRole ? 'mt-0' : '2xl:mt-32'"
       class="flex flex-col px-5 items-center justify-center max-h-screen gap-2 md:gap-6">
       <!-- icon -->
       <div
