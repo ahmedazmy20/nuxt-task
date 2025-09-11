@@ -1,7 +1,14 @@
 <script setup lang="ts">
 import { useRouter } from "vue-router";
+import { useLanguage } from "~/composables/useLanguage";
+
 import * as z from "zod";
 import { toTypedSchema } from "@vee-validate/zod";
+import { useI18n } from "vue-i18n";
+const { t } = useI18n();
+
+// function to switch language
+const { locale, switchLanguage } = useLanguage();
 
 // schema with required + custom rules
 const schema = toTypedSchema(
@@ -64,20 +71,35 @@ const login = handleSubmit(async (values) => {
 </script>
 
 <template>
-  <div class="min-h-screen flex flex-col justify-center items-center px-4">
+  <div
+    class="min-h-screen flex flex-col justify-center items-center px-4"
+    :dir="locale === 'ar' ? 'rtl' : 'ltr'">
+    <!-- Language Switcher -->
+    <div class="absolute font-bold text-2xl z-50 top-5 right-5 flex space-x-2">
+      <button
+        :class="locale === 'ar' ? 'underline text-blue-600' : 'text-white'"
+        @click="switchLanguage('ar')">
+        عربي
+      </button>
+      <button
+        :class="locale === 'en' ? 'underline text-white' : 'text-blue-600'"
+        @click="switchLanguage('en')">
+        English
+      </button>
+    </div>
     <form @submit.prevent="login">
       <div
-        class="flex flex-col bg-[#fcf9f8] justify-center items-center gap-3 md:min-w-md rounded-2xl px-8 py-14 mx-auto shadow-2xl">
-        <h1 class="text-xl md:text-3xl font-bold">Welcome to Learning</h1>
+        class="flex flex-col bg-[#f8f8fc] justify-center items-center gap-3 md:min-w-md rounded-2xl px-8 py-14 mx-auto shadow-2xl">
+        <h1 class="text-xl md:text-3xl font-bold">{{ t("Welcome") }}</h1>
         <p class="md:font-semibold text-gray-500 text-center">
-          Access your educational dashboard
+          {{ t("access") }}
         </p>
 
         <div class="input mt-10 w-full flex flex-col gap-4">
           <!-- Staff/Student ID -->
           <div class="flex flex-col gap-1">
             <label for="id" class="text-sm font-medium text-gray-700">
-              Staff/Student ID
+              {{ t("staff") }}
             </label>
             <Field v-slot="{ field, errorMessage, meta }" name="id">
               <UInput v-bind="field" type="text" placeholder="Enter your ID" />
@@ -92,7 +114,7 @@ const login = handleSubmit(async (values) => {
           <!-- Password -->
           <div class="flex flex-col gap-1">
             <label for="password" class="text-sm font-medium text-gray-700">
-              Password
+              {{ t("password") }}
             </label>
             <Field v-slot="{ field, errorMessage, meta }" name="password">
               <UInput
@@ -110,7 +132,7 @@ const login = handleSubmit(async (values) => {
           <!-- Arabic Only Input -->
           <div class="flex flex-col gap-1">
             <label for="arabicField" class="text-sm font-medium text-gray-700">
-              الاسم بالعربية فقط
+              {{ t("name-ar") }}
             </label>
             <Field v-slot="{ field, errorMessage, meta }" name="arabicField">
               <UInput
@@ -128,7 +150,7 @@ const login = handleSubmit(async (values) => {
           <!-- English Only Input -->
           <div class="flex flex-col gap-1">
             <label for="englishField" class="text-sm font-medium text-gray-700">
-              English Name Only
+              {{ t("name-en") }}
             </label>
             <Field v-slot="{ field, errorMessage, meta }" name="englishField">
               <UInput

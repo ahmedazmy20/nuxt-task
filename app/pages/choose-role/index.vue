@@ -105,7 +105,7 @@ const BackToLogin = () => {
         <div
           v-for="role in roles"
           :key="role.role"
-          class="flex flex-col justify-center items-center bg-[#F8FAFC] border-2 shadow-md rounded-lg cursor-pointer transition flex-grow min-w-[10rem] max-w-[17rem] md:w-[12rem] h-[10rem] md:h-[15rem] md:px-11 md:py-10"
+          class="flex flex-col justify-center items-center bg-[#fcf8f8] border-2 shadow-md rounded-lg cursor-pointer transition-all duration-500 flex-grow min-w-[10rem] max-w-[17rem] md:w-[12rem] h-[10rem] md:h-[15rem] md:px-11 md:py-1"
           :class="
             selectedRole === role.role ? 'border-blue-500' : 'border-gray-200'
           "
@@ -114,21 +114,27 @@ const BackToLogin = () => {
             selectedBranch = '';
           ">
           <div
-            class="w-10 h-10 md:w-16 md:h-16 flex items-center justify-center rounded-full bg-[#DBEAFE]">
+            class="w-10 h-10  md:w-16 md:h-16 flex items-center justify-center rounded-full bg-[#DBEAFE]">
             <component
               :is="role.icon"
               class="text-blue-600 w-8 h-8 md:w-12 md:h-12" />
           </div>
+
           <h2
             class="mt-3 mb-2 font-semibold md:font-bold md:text-xl text-center">
             {{ role.role }}
           </h2>
+
           <p class="text-[#626e7e] text-center text-sm md:text-base md:mb-5">
             {{ role.numBranchs }}
           </p>
-          <strong v-if="selectedRole === role.role">
-            <BadgeCheck class="w-6 h-6 text-blue-600" />
-          </strong>
+
+          <!-- Container ثابت للأيقونة -->
+          <div class="h-6 w-6 flex items-center justify-center">
+            <BadgeCheck
+              v-show="selectedRole === role.role"
+              class="w-6 h-6 text-blue-600 transition-opacity duration-300" />
+          </div>
         </div>
       </div>
 
@@ -143,13 +149,15 @@ const BackToLogin = () => {
 
           <div
             :class="
-              filteredBranches.length < 2 ? 'min-h-[5rem]' : 'min-h-[8rem] md:min-h-[5rem]'
+              filteredBranches.length < 2
+                ? 'min-h-[5rem]'
+                : 'min-h-[8rem] md:min-h-[5rem]'
             "
             class="flex flex-col md:flex-row md:flex-wrap gap-4 lg:gap-6 mt-4 w-full max-h-[5rem] overflow-y-auto md:max-h-none md:overflow-visible px-2 scroll-smooth">
             <div
               v-for="branch in filteredBranches"
               :key="branch.name"
-              class="flex md:flex-grow lg:flex-grow-0 justify-center items-center shadow-md rounded-lg cursor-pointer md:max-h-[5rem] px-2 py-2 lg:px-6 lg:py-4 gap-5 border-2 transition mt-2"
+              class="flex md:flex-grow lg:flex-grow-0 justify-center items-center shadow-md rounded-lg cursor-pointer md:max-h-[5rem] px-2 py-2 lg:px-6 lg:py-4 gap-5 border-2 transition duration-300 mt-2"
               :class="
                 selectedBranch === branch.name
                   ? 'border-blue-500'
@@ -165,7 +173,7 @@ const BackToLogin = () => {
                 <p>Branch Location</p>
               </div>
               <strong v-if="selectedBranch === branch.name">
-                <BadgeCheck class="w-6 h-6 text-blue-600" />
+                <BadgeCheck class="w-5 h-5 text-blue-600" />
               </strong>
             </div>
           </div>
@@ -187,3 +195,22 @@ const BackToLogin = () => {
     </div>
   </div>
 </template>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.fade-enter-to,
+.fade-leave-from {
+  opacity: 1;
+  transform: scale(1);
+}
+</style>

@@ -8,10 +8,26 @@ export default defineNuxtConfig({
     // Other modules
     "@nuxt/eslint",
     "@nuxt/ui",
+    "@nuxtjs/i18n",
     "@nuxtjs/color-mode",
     // The correct configuration for vee-validate
     ["@vee-validate/nuxt", { autoImports: true }],
   ],
+  i18n: {
+    locales: [
+      { code: "en", file: "en.json", iso: "en-US", name: "English" },
+      { code: "ar", file: "ar.json", iso: "ar-EG", name: "العربية" },
+    ],
+    strategy: "prefix_except_default",
+    defaultLocale: "en",
+    langDir: "lang/",
+    detectBrowserLanguage: {
+      useCookie: true, // يخزن اللغة في Cookie
+      cookieKey: "i18n_redirected", // اسم الكوكي
+      redirectOn: "root", // يوجّه للغة الصح عند الدخول
+      alwaysRedirect: false, // مش كل مرة يعمل Redirect
+    },
+  },
 
   css: ["@/assets/css/main.css"],
 
