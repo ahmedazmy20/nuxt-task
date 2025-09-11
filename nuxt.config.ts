@@ -20,12 +20,12 @@ export default defineNuxtConfig({
   },
 
   app: {
-    baseURL: "/nuxt-task/",
+    baseURL: "/", //    /nuxt-task/
   },
 
-  nitro: {
-    preset: "github-pages",
-  },
+  // nitro: {
+  //   preset: "github-pages",
+  // },
 
   colorMode: {
     preference: "light",
