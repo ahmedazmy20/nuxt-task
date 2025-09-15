@@ -1,13 +1,18 @@
 <script setup>
 import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
+import { useI18n } from "vue-i18n";
 import {
   ArrowLeft,
   GraduationCap,
   BookOpen,
   School,
   BadgeCheck,
+  ArrowRight,
 } from "lucide-vue-next";
+
+const { t, locale } = useI18n();
+console.log(locale._value);
 
 const router = useRouter();
 const user = useState("user");
@@ -65,24 +70,14 @@ const BackToLogin = () => {
 </script>
 
 <template>
-  <div class="bg-[#fcf8f4] min-h-screen flex flex-col">
-    <!-- Back to Home -->
-    <div class="p-5 flex items-center justify-between">
-      <button
-        class="hover:bg-blue-500 font-semibold px-4 py-2 rounded-md transition-colors duration-200 flex"
-        @click="BackToLogin">
-        <ArrowLeft class="text-sm me-2" />Back to Login
-      </button>
-      <div>
-        <p>Welcome, {{ user?.englishField }}</p>
-        <p class="text-sm text-end text-gray-500">ID: {{ user?.id }}</p>
-      </div>
-    </div>
-
+  <div class="bg-[#fcf8f4] min-h-screen flex flex-col justify-center">
     <div
       :class="selectedRole ? 'mt-0' : '2xl:mt-32'"
-      class="flex flex-col px-5 items-center justify-center max-h-screen gap-2 md:gap-6">
+      class="flex flex-col px-5 items-center pt-15 justify-center max-h-screen gap-2 md:gap-6">
       <!-- icon -->
+      <div>
+        <p>{{ t("role.welcome") }}, {{ user?.englishField }}</p>
+      </div>
       <div
         class="w-16 h-16 hidden md:w-20 md:min-h-20 bg-blue-100 rounded-full md:flex items-center justify-center">
         <span class="text-2xl"
@@ -91,30 +86,32 @@ const BackToLogin = () => {
       </div>
 
       <!-- title -->
-      <h1 class="text-2xl md:text-4xl font-bold">Choose Your Role</h1>
+      <h1 class="text-2xl md:text-4xl font-bold">{{ t("role.choose") }}</h1>
 
       <!-- description -->
       <p
         class="text-gray-500 text-center text-sm md:text-xl font-medium max-w-3xl px-5 md:px-0">
-        Select your position and branch to access your personalized dashboard
+        {{ t("role.select") }}
       </p>
 
       <!-- select roles -->
+      <!-- hide the role selection in small screens -->
       <div
+        :class="selectedRole ? 'hidden md:flex ' : 'flex'"
         class="flex gap-5 p-4 justify-start md:justify-center overflow-x-auto md:overflow-visible w-full">
         <div
           v-for="role in roles"
           :key="role.role"
           class="flex flex-col justify-center items-center bg-[#fcf8f8] border-2 shadow-md rounded-lg cursor-pointer transition-all duration-500 flex-grow min-w-[10rem] max-w-[17rem] md:w-[12rem] h-[10rem] md:h-[15rem] md:px-11 md:py-1"
           :class="
-            selectedRole === role.role ? 'border-blue-500' : 'border-gray-200'
+            selectedRole === role.role ? 'border-blue-500 ' : 'border-gray-200'
           "
           @click="
             selectedRole = role.role;
             selectedBranch = '';
           ">
           <div
-            class="w-10 h-10  md:w-16 md:h-16 flex items-center justify-center rounded-full bg-[#DBEAFE]">
+            class="w-10 h-10 md:w-16 md:h-16 flex items-center justify-center rounded-full bg-[#DBEAFE]">
             <component
               :is="role.icon"
               class="text-blue-600 w-8 h-8 md:w-12 md:h-12" />
@@ -129,7 +126,6 @@ const BackToLogin = () => {
             {{ role.numBranchs }}
           </p>
 
-          <!-- Container ثابت للأيقونة -->
           <div class="h-6 w-6 flex items-center justify-center">
             <BadgeCheck
               v-show="selectedRole === role.role"
@@ -137,6 +133,16 @@ const BackToLogin = () => {
           </div>
         </div>
       </div>
+      <!-- add btn to back TO ROLES -->
+      <button
+        v-if="selectedRole"
+        class="text-white block md:hidden bg-blue-500 px-4 py-2 rounded-xl md:font-bold md:text-xl duration-200 transition-all hover:bg-blue-600 mb-3"
+        @click="
+          selectedRole = '';
+          selectedBranch = '';
+        ">
+        {{ t("role.changerole") }}
+      </button>
 
       <!-- select branch -->
       <div
@@ -181,17 +187,29 @@ const BackToLogin = () => {
       </div>
 
       <!-- Continue Button -->
-      <button
-        :disabled="!selectedBranch"
-        class="text-white px-4 md:px-11 py-2 rounded-xl font-bold md:text-xl duration-200 transition-all"
-        :class="[
-          !selectedBranch
-            ? 'bg-blue-300 cursor-not-allowed'
-            : 'bg-blue-500 hover:bg-blue-600',
-        ]"
-        @click="continueDashboard">
-        Continue to Dashboard
-      </button>
+      <div class="flex gap-2 md:gap-5 mt-3 mb-10 text-white">
+        <button
+          class="bg-blue-500 hover:bg-blue-600 md:font-semibold px-4 md:px-11 py-2 rounded-xl transition-colors duration-200 flex items-center"
+          @click="BackToLogin">
+          <component
+            :is="locale === 'en' ? ArrowLeft : ArrowRight"
+            class="text-[0.2rem] me-2" />
+
+          {{ t("role.back") }}
+          <span class="hidden md:inline ms-1">{{ t("role.tologin") }}</span>
+        </button>
+        <button
+          :disabled="!selectedBranch"
+          class="text-white px-4 md:px-11 py-2 rounded-xl md:font-bold md:text-xl duration-200 transition-all"
+          :class="[
+            !selectedBranch
+              ? 'bg-blue-300 cursor-not-allowed'
+              : 'bg-blue-500 hover:bg-blue-600',
+          ]"
+          @click="continueDashboard">
+          {{ t("role.Continue") }}
+        </button>
+      </div>
     </div>
   </div>
 </template>

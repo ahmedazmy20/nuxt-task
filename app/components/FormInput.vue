@@ -8,7 +8,7 @@ import { useI18n } from "vue-i18n";
 const { t } = useI18n();
 
 // function to switch language
-const { locale, switchLanguage } = useLanguage();
+const { locale } = useLanguage();
 
 // schema with required + custom rules
 const schema = toTypedSchema(
@@ -74,19 +74,6 @@ const login = handleSubmit(async (values) => {
   <div
     class="min-h-screen flex flex-col justify-center items-center px-4"
     :dir="locale === 'ar' ? 'rtl' : 'ltr'">
-    <!-- Language Switcher -->
-    <div class="absolute font-bold text-2xl z-50 top-5 right-5 flex space-x-2">
-      <button
-        :class="locale === 'ar' ? 'underline text-blue-600' : 'text-white'"
-        @click="switchLanguage('ar')">
-        عربي
-      </button>
-      <button
-        :class="locale === 'en' ? 'underline text-white' : 'text-blue-600'"
-        @click="switchLanguage('en')">
-        English
-      </button>
-    </div>
     <form @submit.prevent="login">
       <div
         class="flex flex-col bg-[#f8f8fc] justify-center items-center gap-3 md:min-w-md rounded-2xl px-8 py-14 mx-auto shadow-2xl">
@@ -102,7 +89,10 @@ const login = handleSubmit(async (values) => {
               {{ t("staff") }}
             </label>
             <Field v-slot="{ field, errorMessage, meta }" name="id">
-              <UInput v-bind="field" type="text" placeholder="Enter your ID" />
+              <UInput
+                v-bind="field"
+                type="text"
+                :placeholder="t('idPlaceholder')" />
               <span
                 v-if="meta.touched || errorMessage"
                 class="text-red-500 text-sm">
@@ -120,7 +110,7 @@ const login = handleSubmit(async (values) => {
               <UInput
                 v-bind="field"
                 type="password"
-                placeholder="Enter your password" />
+                :placeholder="t('passwordPlaceholder')" />
               <span
                 v-if="meta.touched || errorMessage"
                 class="text-red-500 text-sm">
@@ -138,7 +128,7 @@ const login = handleSubmit(async (values) => {
               <UInput
                 v-bind="field"
                 type="text"
-                placeholder="أدخل نص بالعربية فقط" />
+                :placeholder="t('nameArPlaceholder')" />
               <span
                 v-if="meta.touched || errorMessage"
                 class="text-red-500 text-sm">
@@ -156,7 +146,7 @@ const login = handleSubmit(async (values) => {
               <UInput
                 v-bind="field"
                 type="text"
-                placeholder="Enter text in English only" />
+                :placeholder="t('nameEnPlaceholder')" />
               <span
                 v-if="meta.touched || errorMessage"
                 class="text-red-500 text-sm">
@@ -170,8 +160,8 @@ const login = handleSubmit(async (values) => {
         <UButton
           class="mt-4 w-full bg-[#2B67EC] hover:bg-[#2B67EC]/90 active:bg-[#2B67EC]/80 flex items-center justify-center py-3"
           type="submit">
-          <span v-if="!isLoading">Sign in</span>
-          <span v-else>Signing in...</span>
+          <span v-if="!isLoading">{{ t("signIn") }}</span>
+          <span v-else>{{ t("Signing") }}</span>
         </UButton>
       </div>
     </form>

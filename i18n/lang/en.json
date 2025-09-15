@@ -4,5 +4,47 @@
   "staff": "Staff/Student ID",
   "password": "Password",
   "name-en": "Name (English)",
-  "name-ar": "Name (Arabic)"
+  "name-ar": "Name (Arabic)",
+  "signIn": "Sign In",
+  "Signing": "Signing in...",
+  "school": "Your School Name",
+  "education": "Excellence in Education",
+  "Empowering": "Empowering minds and shaping futures through innovative learning experiences",
+  "knowledge": "Knowledge",
+  "knowledgeDesc": "Comprehensive curriculum and learning resources",
+  "community": "Community",
+  "communityDesc": "Collaborative learning environment",
+  "excellence": "Excellence",
+  "excellenceDesc": "Striving for academic achievement",
+  "growth": "Growth",
+  "growthDesc": "Personal and academic development",
+  "idPlaceholder": "Enter your ID",
+  "passwordPlaceholder": "Enter your password",
+  "nameArPlaceholder": "Enter your name in Arabic",
+  "nameEnPlaceholder": "Enter your name in English",
+  "role": {
+    "welcome": "Welcome",
+    "choose": "Choose your role",
+    "select": "Select your position and branch to access your personalized dashboard",
+
+    "admin": "Administrator",
+    "teacher": "Teacher",
+    "student": "Student Affairs",
+
+    "threebranch": "3 branches available",
+    "towbranch": "2 branches available",
+    "onebranch": "2 branches available",
+
+    "changerole": "Change Role",
+    "back": "Back",
+    "tologin": "to Login",
+    "selectbranch": "Select Your Branch",
+
+    "branch1": "Main Campus",
+    "branch2": "North Branch",
+    "branch3": "South Branch",
+    "branchlocation": "Branch Location",
+
+    "Continue": "Continue to Dashboard"
+  }
 }

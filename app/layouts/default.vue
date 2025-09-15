@@ -1,6 +1,7 @@
 <template>
   <div>
     <!-- navbar -->
+     <language-switcher />
     <slot />
     <!-- footer -->
   </div>
