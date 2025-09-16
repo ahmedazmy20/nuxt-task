@@ -134,6 +134,7 @@ const BackToLogin = () => {
         </div>
       </div>
       <!-- add btn to back TO ROLES -->
+      <transition name="fade">
       <button
         v-if="selectedRole"
         class="text-white block md:hidden bg-blue-500 px-4 py-2 rounded-xl md:font-bold md:text-xl duration-200 transition-all hover:bg-blue-600 mb-3"
@@ -143,48 +144,51 @@ const BackToLogin = () => {
         ">
         {{ t("role.changerole") }}
       </button>
+      </transition>
 
       <!-- select branch -->
-      <div
-        v-if="selectedRole"
-        class="bg-[#FFFFFF] w-full max-w-4xl rounded-2xl py-5 mb-3">
-        <h2 class="text-2xl font-bold text-center">Select Your Branch</h2>
+      <transition name="fade">
         <div
-          class="flex flex-col md:flex-row gap-4 px-5 rounded-2xl items-center w-full md:max-w-[58rem]">
-          <!-- branches container -->
-
+          v-if="selectedRole"
+          class="bg-[#FFFFFF] w-full max-w-4xl rounded-2xl py-5 mb-3">
+          <h2 class="text-2xl font-bold text-center">Select Your Branch</h2>
           <div
-            :class="
-              filteredBranches.length < 2
-                ? 'min-h-[5rem]'
-                : 'min-h-[8rem] md:min-h-[5rem]'
-            "
-            class="flex flex-col md:flex-row md:flex-wrap gap-4 lg:gap-6 mt-4 w-full max-h-[5rem] overflow-y-auto md:max-h-none md:overflow-visible px-2 scroll-smooth">
+            class="flex flex-col md:flex-row gap-4 px-5 rounded-2xl items-center w-full md:max-w-[58rem]">
+            <!-- branches container -->
+
             <div
-              v-for="branch in filteredBranches"
-              :key="branch.name"
-              class="flex md:flex-grow lg:flex-grow-0 justify-center items-center shadow-md rounded-lg cursor-pointer md:max-h-[5rem] px-2 py-2 lg:px-6 lg:py-4 gap-5 border-2 transition duration-300 mt-2"
               :class="
-                selectedBranch === branch.name
-                  ? 'border-blue-500'
-                  : 'border-gray-200'
+                filteredBranches.length < 2
+                  ? 'min-h-[5rem]'
+                  : 'min-h-[8rem] md:min-h-[5rem]'
               "
-              @click="selectedBranch = branch.name">
+              class="flex flex-col md:flex-row md:flex-wrap gap-4 lg:gap-6 mt-4 w-full max-h-[5rem] overflow-y-auto md:max-h-none md:overflow-visible px-2 scroll-smooth">
               <div
-                class="w-10 h-10 lg:w-16 lg:h-16 flex items-center justify-center text-2xl rounded-2xl bg-[#F1F5F9]">
-                <component :is="branch.icon" class="w-8 h-8 text-[#6c5245]" />
+                v-for="branch in filteredBranches"
+                :key="branch.name"
+                class="flex md:flex-grow lg:flex-grow-0 justify-center items-center shadow-md rounded-lg cursor-pointer md:max-h-[5rem] px-2 py-2 lg:px-6 lg:py-4 gap-5 border-2 transition duration-300 mt-2"
+                :class="
+                  selectedBranch === branch.name
+                    ? 'border-blue-500'
+                    : 'border-gray-200'
+                "
+                @click="selectedBranch = branch.name">
+                <div
+                  class="w-10 h-10 lg:w-16 lg:h-16 flex items-center justify-center text-2xl rounded-2xl bg-[#F1F5F9]">
+                  <component :is="branch.icon" class="w-8 h-8 text-[#6c5245]" />
+                </div>
+                <div class="flex flex-col">
+                  <h2 class="font-bold">{{ branch.name }}</h2>
+                  <p>Branch Location</p>
+                </div>
+                <strong v-if="selectedBranch === branch.name">
+                  <BadgeCheck class="w-5 h-5 text-blue-600" />
+                </strong>
               </div>
-              <div class="flex flex-col">
-                <h2 class="font-bold">{{ branch.name }}</h2>
-                <p>Branch Location</p>
-              </div>
-              <strong v-if="selectedBranch === branch.name">
-                <BadgeCheck class="w-5 h-5 text-blue-600" />
-              </strong>
             </div>
           </div>
         </div>
-      </div>
+      </transition>
 
       <!-- Continue Button -->
       <div class="flex gap-2 md:gap-5 mt-3 mb-10 text-white">
